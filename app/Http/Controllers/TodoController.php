@@ -10,13 +10,13 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'todo' => 'required'
+            'todo' => 'max:100'
         ]);
 
         Todo::create([
             'todo' => $request->todo,
         ]);
 
-        return back();
+        return redirect(url()->previous());
     }
 }

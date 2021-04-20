@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('dashboard', ["todos"=>\App\Models\Todo::all()]);
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::get('/', function () {return view('dashboard', ["todos"=>\App\Models\Todo::all()]);})->name('dashboard');
+    Route::post('/',[TodoController::class, 'store'])->name('store-todo');
+});
 
-Route::post('/',[TodoController::class, 'store'])->name('store-todo');
