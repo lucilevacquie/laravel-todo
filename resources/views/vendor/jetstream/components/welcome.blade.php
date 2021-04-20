@@ -8,10 +8,8 @@
                 @else
                     <ul>
                         @foreach($todos as $todo)
-                            <div class="flex items-center [checkbox === '1' ? 'bg-gray-900' : 'bg-gray-400']" x-data="{ checkbox: '0' }">
-                                <input id="checkbox" type="checkbox" @click="checkbox === '0' ? checkbox = '1' : checkbox = '0'" class="m-2 [checkbox === '1' ? 'bg-gray-900' : 'bg-gray-400']"/>
-                                <li class="">{{$todo->todo}}</li>
-                            </div>
+                            {{-- <x-jet-listitem :todo="$todo"></x-jet-listitem> --}}
+                            <livewire:list-item :todo="$todo"/>
                         @endforeach
                     </ul>
                 @endif
