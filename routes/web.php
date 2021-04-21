@@ -23,3 +23,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/',[TodoController::class, 'store'])->name('store-todo');
 });
 
+
+Route::post('/todo/todoToDoing',[TodoController::class, 'todoToDoing'])->name('todo.todoToDoing');
+
+Route::post('/todo/doingToDone',[TodoController::class, 'doingToDone'])->name('todo.doingToDone');
+
+//Route::post('/todo/doingToTodo',[TodoController::class, 'doingToTodo'])->name('todo.doingToTodo');
+//
+//Route::post('/todo/doneToDoing',[TodoController::class, 'doneToDoing'])->name('todo.doneToDoing');
+
+Route::get('/todo/destroy',[TodoController::class, 'destroy'])->name('destroy.todo');
+
+
+

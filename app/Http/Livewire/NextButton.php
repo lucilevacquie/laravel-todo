@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class ListItem extends Component
+class NextButton extends Component
 {
-    public $todo;
+    public $id;
 
     public function render()
     {
-        return view('livewire.list-item');
+        return view('livewire.next-button');
     }
+
 }
