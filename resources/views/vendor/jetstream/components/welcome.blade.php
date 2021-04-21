@@ -1,10 +1,10 @@
 <div class="grid grid-cols-8 gap-6 px-4 m-6">
     <div class="col-span-2">
         <div class="text-center font-bold">To do</div>
-        <div class="grid grid-rows-6 border bg-white h-96">
+        <div class="grid grid-rows-6 border bg-red-100 h-96">
             <div class="row-span-5">
-                @if(count($todos) === 0)
-                    <div>Add a new task to your list!</div>
+                @if(count($todos->where("status" , 1)) === 0)
+                    <div class="p-2">Add a new task to your list!</div>
                 @else
                     <ul id="todo">
                         <form action="{{route("todo.todoToDoing")}}" method="POST" id="todoForm">
@@ -18,8 +18,8 @@
             </div>
             <form method="POST" class="grid grid-cols-4">
                 @csrf
-                <input id="todo" name="todo" type="text"  placeholder="Add a task" class="col-span-3 focus:border-red-600"/>
-                <button type="submit" class="border bg-red-600 text-white">+</button>
+                <input id="todo" name="todo" type="text"  placeholder="Add a task" class="border-0 col-span-3 focus:border-red-600"/>
+                <button type="submit" class="border-0 bg-red-600 text-white">+</button>
             </form>
         </div>
     </div>
@@ -45,16 +45,16 @@
 
     <div class="col-span-2">
         <div class="text-center font-bold">Doing</div>
-        <div class="border bg-white h-96">
-            <ul id="doing">
-                <form action="{{route("todo.doingToDone")}}" method="POST" id="doingForm">
-                    @csrf
-                    @foreach($todos->where("status" , 2) as $todo)
-                        <livewire:list-item :todo="$todo"/>
-                    @endforeach
-                </form>
-            </ul>
-        </div>
+            <div class="border bg-red-300 h-96">
+                <ul id="doing">
+                    <form action="{{route("todo.doingToDone")}}" method="POST" id="doingForm">
+                        @csrf
+                        @foreach($todos->where("status" , 2) as $todo)
+                            <livewire:list-item :todo="$todo"/>
+                        @endforeach
+                    </form>
+                </ul>
+            </div>
     </div>
 
 {{--    <livewire:next-button/>--}}
@@ -77,10 +77,10 @@
 
     <div class="col-span-2">
         <div class="text-center font-bold">Done</div>
-        <div class=" grid grid-rows-6 border bg-white h-96">
+        <div class=" grid grid-rows-6 border bg-red-500 h-96">
             <div class="row-span-5">
                 <ul id="done">
-                    <form action="{{route("destroy.todo")}}" method="POST" id="doneForm">
+                    <form action="" method="POST" id="doneForm">
                         @csrf
                         @foreach($todos->where("status" , 3) as $todo)
                             <livewire:list-item :todo="$todo"/>
@@ -89,9 +89,9 @@
                 </ul>
             </div>
 
-            <form method="GET" action="{{route("destroy.todo")}}" class="grid grid-cols-4">
+            <form method="GET" action="" class="grid grid-cols-4">
                 @csrf
-                <button type="submit" class="col-span-full border bg-red-600 text-white">Clear</button>
+                <button type="submit" class="col-span-full border-0 bg-red-600 text-white">Clear</button>
             </form>
         </div>
     </div>

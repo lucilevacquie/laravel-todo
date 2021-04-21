@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'todo' => 'max:100'
         ]);
@@ -16,6 +18,7 @@ class TodoController extends Controller
         Todo::create([
             'todo' => $request->todo,
             'status'=>1,
+            'user_id'=>Auth::user()->id,
         ]);
 
         return redirect(url()->previous());
